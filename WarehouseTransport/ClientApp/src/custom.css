@@ -13,8 +13,13 @@ code {
   border-color: #1861ac;
 }
 
-.container {
-    /*   margin-left:0px;
-    width:1000px;
-    height:600px;*/
+.driverSelection {
+    margin:5px 0px 5px 0px;
+    padding:10px 20px 10px 20px;
+    border :solid 1px green;
+    border-radius:6px;
+}
+
+.driverSelection select {
+    margin-left:10px;
 }

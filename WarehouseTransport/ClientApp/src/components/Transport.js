@@ -1,94 +1,173 @@
-﻿import React, { Component } from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+﻿import React from "react";
+import {
+    withGoogleMap,
+    GoogleMap,
+    withScriptjs,
+    Marker,
+    DirectionsRenderer
+} from "react-google-maps";
 
 
-const styles= {
-    style : {
-        width: "80%",
-        height: "80%"
-    },
-    containerStyle : {
-        position: "relative",
-        width: "90%",
-        height: "90%"
-    },
-    infoWindow : {
-    }
-}
-
-
-export class Transport extends Component {
-
+class MapDirectionsRenderer extends React.Component {
     state = {
-        activeMarker: {},
-        selectedPlace: {},
-        showingInfoWindow: false
+        directions: null,
+        error: null,
+        places: [],
+        loaded: false,
+        driver:0
     };
 
-    onMarkerClick = (props, marker) =>
-        this.setState({
-            activeMarker: marker,
-            selectedPlace: props,
-            showingInfoWindow: true
-        });
 
-    onInfoWindowClose = () =>
-        this.setState({
-            activeMarker: null,
-            showingInfoWindow: false
-        });
+    async getDirections() {
+        const { travelMode, driver } = this.props;
+        const response = await fetch('api/directions/' + driver);
+        const data = await response.json();
+        //this.setState({ places: data });
 
-    onMapClicked = () => {
-        if (this.state.showingInfoWindow)
-            this.setState({
-                activeMarker: null,
-                showingInfoWindow: false
-            });
-    };
+        let places = data;
+
+        //const loc = this.state.places;
+
+        const waypoints = places.map(p => ({
+            location: { lat: p.latitude, lng: p.longitude },
+            stopover: true
+        }))
+        const origin = waypoints.shift().location;
+        const destination = waypoints.pop().location;
+    
+        const directionsService = new window.google.maps.DirectionsService();
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: travelMode,
+                waypoints: waypoints
+            },
+            (result, status) => {
+                if (status === window.google.maps.DirectionsStatus.OK) {
+                    this.setState({
+                        directions: result
+                    });
+                } else {
+                    this.setState({ error: result });
+                }
+            }
+        );
+        this.setState({ loaded: true, driver: driver });
+
+     
+    }
+
+
+    componentDidMount() {
+        //this.getDirections();
+    }
 
     render() {
-        if (!this.props.loaded) return <div>Loading...</div>;
+        let newDriver = this.props.driver;
+        if (newDriver != this.state.driver) {
+            //this.setState({ loaded: false });
+            this.state.loaded = false;
+            this.getDirections();
+        }
 
-        return (
-            <Map
-                className="map"
-                google={this.props.google}
-                onClick={this.onMapClicked}
-                style={styles.style}
-                zoom={13}
-            >
-                <Marker
-                    name="Marker 1"
-                    onClick={this.onMarkerClick}
-                    position={{ lat: 37.778519, lng: -122.40564 }}
-                />
-
-                <Marker
-                    name="Marker 2"
-                    onClick={this.onMarkerClick}
-                    position={{ lat: 37.759703, lng: -122.428093 }}
-                />
-
-                <Marker name="Marker 3" onClick={this.onMarkerClick} />
-
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    onClose={this.onInfoWindowClose}
-                    visible={this.state.showingInfoWindow}
-                    style={styles.infoWindow}
-                >
-                    <div>
-                        <h4>{this.state.selectedPlace.name}</h4>
-                    </div>
-                </InfoWindow>
-            </Map>
-        );
+        if (this.state.error) {
+            return <h1>{this.state.error}</h1>;
+        }
+        if (!this.state.loaded) {
+            return <h1 className="loadingRoute">Loading route</h1>;
+        }
+        return (this.state.directions && <DirectionsRenderer directions={this.state.directions} />)
     }
 }
 
+const Map = withScriptjs(
+    withGoogleMap(props => (
+        <GoogleMap
+            defaultCenter={props.defaultCenter}
+            defaultZoom={props.defaultZoom}
+        >
+            {props.markers.map((marker, index) => {
+                const position = { lat: marker.latitude, lng: marker.longitude };
+                return <Marker key={index} position={position} />;
+            })}
+            <MapDirectionsRenderer
+                places={props.markers}
+                travelMode={window.google.maps.TravelMode.DRIVING}
+                driver={props.driver}
+            />
+        </GoogleMap>
+    ))
+);
+
+const googleMapsApiKey = "AIzaSyD1uCZ65ceA_IbL-_cGa4ATNola0934TbE";
 
 
-export default GoogleApiWrapper({
-    //apiKey: process.env.REACT_APP_API_KEY,
-    apiKey: ("AIzaSyD1uCZ65ceA_IbL-_cGa4ATNola0934TbE")
-})(Transport)
+
+class Transport extends React.Component {
+//const Transport = props => {
+    //const { places } = props;
+    //this.state = { driver: 1 };
+
+    /*const places = [
+        { latitude: -37.762553, longitude: 144.954236 },
+        { latitude: -37.822579, longitude: 145.006292 },
+        { latitude: -37.814355, longitude: 144.986959 },
+        { latitude: -37.828511, longitude: 145.038285 }
+    ];*/
+    constructor(props) {
+        super(props);
+        this.state = { driver: "1" };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ driver: event.target.value });
+    }
+  
+
+    render() {
+
+        const places = [];
+
+        const {
+            loadingElement,
+            containerElement,
+            mapElement,
+            defaultCenter,
+            defaultZoom,
+            driver
+        } = this.props;
+
+        return (
+            <div>
+                <div className="driverSelection">
+                    <span>Select driver to view route</span>
+                    <select value={this.state.driver} onChange={this.handleChange}>
+                        <option value="1">Driver 1</option>
+                        <option value="2">Driver 2</option>
+                        <option value="3">Driver 3</option>
+                        <option value="4">Driver 4</option>
+                        <option value="5">Driver 5</option>
+                    </select>
+                </div>
+                <Map
+                    googleMapURL={
+                        'https://maps.googleapis.com/maps/api/js?key=' +
+                        googleMapsApiKey +
+                        '&libraries=geometry,drawing,places'
+                    }
+                    markers={places}
+                    driver={this.state.driver}
+                    loadingElement={loadingElement || <div style={{ height: "100%" }} />}
+                    containerElement={containerElement || <div style={{ height: "80vh" }} />}
+                    mapElement={mapElement || <div style={{ height: "100%" }} />}
+                    defaultCenter={defaultCenter || { lat: -37.762553, lng: 144.954236 }}
+                    defaultZoom={defaultZoom || 11}
+                />
+            </div>
+        );
+    }
+};
+
+export default Transport;

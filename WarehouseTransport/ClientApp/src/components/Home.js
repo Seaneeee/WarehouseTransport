@@ -2,24 +2,26 @@ import React, { Component } from 'react';
 
 export class Home extends Component {
   static displayName = Home.name;
-
-  render () {
+    //console.log(process.env.PUBLIC_URL);
+    render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
+        <h1>Ninja Delivery Notes</h1>
+        <p>Basic delivery calculator between warehouses and destinations:</p>
+            <ul>
+                <li>Click <b>Route Calculator</b> in menu to view route for each driver.</li>
+                <li>Algorithm based on Melbourne bay area. Melbourne has densities west and north and south east of CBD</li>
+                <li>Delivery points distributed between both Warehouses based on above note.</li>
+                <li>Drivers assigned to warehouse for now on delivery points for each Warehouse</li>
+                <li>Travelling salesman algorithm for routes to give a rough optimisation.  This could certainly be improved by running distances via a road calulator.</li>
+            </ul>
+        <p>Display and technology:</p>
         <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
+          <li>React with Gooogle libraries</li>
+          <li>Simple web api with routing on the backend.</li>
+          <li>As this is a demo for now I haven't used a SQL backend for locations.  This could easily be ported into a entity model with dynamic locations lists depending on business requirements.</li>
         </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
+        <p>This is demonstration application.  I've made assumptions about drivers being located near the warehouse. For now each drivers route is calculated separately, this could be improved to show all driver routes colour coded at the same time with filters to hide routes on request.</p>
       </div>
     );
   }
