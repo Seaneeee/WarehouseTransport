@@ -17,17 +17,11 @@ class MapDirectionsRenderer extends React.Component {
         driver:0
     };
 
-
     async getDirections() {
         const { travelMode, driver } = this.props;
         const response = await fetch('api/directions/' + driver);
         const data = await response.json();
-        //this.setState({ places: data });
-
         let places = data;
-
-        //const loc = this.state.places;
-
         const waypoints = places.map(p => ({
             location: { lat: p.latitude, lng: p.longitude },
             stopover: true
@@ -54,19 +48,14 @@ class MapDirectionsRenderer extends React.Component {
             }
         );
         this.setState({ loaded: true, driver: driver });
-
-     
     }
 
-
     componentDidMount() {
-        //this.getDirections();
     }
 
     render() {
         let newDriver = this.props.driver;
         if (newDriver != this.state.driver) {
-            //this.setState({ loaded: false });
             this.state.loaded = false;
             this.getDirections();
         }
@@ -102,19 +91,7 @@ const Map = withScriptjs(
 
 const googleMapsApiKey = "AIzaSyD1uCZ65ceA_IbL-_cGa4ATNola0934TbE";
 
-
-
 class Transport extends React.Component {
-//const Transport = props => {
-    //const { places } = props;
-    //this.state = { driver: 1 };
-
-    /*const places = [
-        { latitude: -37.762553, longitude: 144.954236 },
-        { latitude: -37.822579, longitude: 145.006292 },
-        { latitude: -37.814355, longitude: 144.986959 },
-        { latitude: -37.828511, longitude: 145.038285 }
-    ];*/
     constructor(props) {
         super(props);
         this.state = { driver: "1" };
@@ -124,7 +101,6 @@ class Transport extends React.Component {
     handleChange(event) {
         this.setState({ driver: event.target.value });
     }
-  
 
     render() {
 

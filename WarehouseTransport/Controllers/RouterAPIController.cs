@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -51,7 +53,8 @@ namespace WarehouseTransport.Controllers
         /*
          * For assign west of city points to western warehouse,assign east of city points to eastern warehouse
          */
-        private static List<Place> assignWH(double[] wh)
+
+        private static List<Place> assignWH(double[] wh, List<Place> listCleaned)
         {
             List<Place> result = new List<Place>();
             bool lWest = false;
@@ -59,135 +62,126 @@ namespace WarehouseTransport.Controllers
             {
                 lWest = true;
             }
-
-            for (int i = 0; i < places.GetLength(0); i++)
+            result.Add(new Place(wh[0], wh[1]));
+            for (int i = 0; i < listCleaned.Count; i++)
             {
-                bool ptWest = (places[i, 1] <= city[1]) || (places[i, 0] >= city[0]);
+                bool ptWest = (listCleaned[i].longitude <= city[1]) || (listCleaned[i].latitude >= city[0]);
                 if ((ptWest && lWest) || (!ptWest && !lWest))
                 {
-                    result.Add(new Place(places[i, 0], places[i, 1]));
+                    result.Add(listCleaned[i]);
                     continue;
                 }
             }
             return result;
 
         }
-
-        private static List<Place> eastOrWest(int driver)
+        private static List<Place> eastOrWest(int driver, List<Place> listCleaned)
         {
             bool lWest = driver < 3;
             List<Place> result;
             if (lWest)
             {
-                result = assignWH(whWest);
+                result = assignWH(whWest, listCleaned);
             }
             else
             {
-                result = assignWH(whEast);
+                result = assignWH(whEast, listCleaned);
             }
             return result;
         }
 
         public static List<Place> getPlaces(int driver)
         {
+            List<Place> listCleaned = clearDuplicates();
+            List<Place> ordered = OrderByDistance(listCleaned);
+            List<Place> wharehouse = eastOrWest(driver, ordered);
+            List<Place> driverList = getDriverList(driver, wharehouse);
+            return driverList;
+
+        }
+
+        private static List<Place> clearDuplicates()
+        {
             List<Place> result = new List<Place>();
-
-
-            List<Place> test = eastOrWest(driver);
-
-            double[] whC;
-
-            //Place wh; 
-            if (driver == 1)
+            for (int i = 0; i < places.GetLength(0); i++)
             {
-                whC = whWest;
-            }
-            else
-            {
-                whC = whEast;
-            }
-            result.Add(new Place(whC[0], whC[1]));
-            for (int i=0;i< 5; i++)
-            {
-                result.Add(new Place(places[i, 0], places[i, 1]));
+                if (result.Find(aa => aa.latitude == places[i, 0] && aa.longitude == places[i, 1]) == null)
+                {
+                    result.Add(new Place(places[i, 0], places[i, 1]));
+                }
             }
             return result;
         }
 
-        /*private static void TwoOpt()
+        private static List<Place> getDriverList(int driver, List<Place> ordered)
         {
-            // Get tour size
-            var size = _tour.TourSize();
-
-            //CHECK THIS!!     
-            for (var i = 0; i < size; i++)
+            int driverIndex = driver;
+            if (driverIndex < 1 || driverIndex > 5)
             {
-                _newTour.SetCity(i, _tour.GetCity(i));
+                driverIndex = 1;
             }
-
-            // repeat until no improvement is made 
-            var improve = 0;
-            var iteration = 0;
-
-            while (improve < 500)
+            int driverSplit = 2;
+            if (driverIndex > 2)
             {
-                var bestDistance = _tour.TourDistance();
-
-                for (var i = 1; i < size - 1; i++)
-                {
-                    for (var k = i + 1; k < size; k++)
-                    {
-                        TwoOptSwap(i, k);
-                        iteration++;
-
-                        var newDistance = _newTour.TourDistance();
-
-                        if (!(newDistance < bestDistance)) continue;
-
-                        // Improvement found so reset
-                        improve = 0;
-
-                        for (var j = 0; j < size; j++)
-                        {
-                            _tour.SetCity(j, _newTour.GetCity(j));
-                        }
-
-                        bestDistance = newDistance;
-
-                        // Update the display
-                        SetTourCoords();
-
-                        TourUpdated.Raise(this, new Tuple<double, int>(bestDistance, iteration));
-                    }
-                }
-
-                improve++;
+                driverIndex -= 2;
+                driverSplit = 3;
             }
+            int nSize = ordered.Count();
+            int nDivision = nSize / driverSplit;
+            List<List<Place>> splitList = ordered.SplitList(nDivision);
+            List<Place> result = splitList[driverIndex - 1];
+            if (driverIndex > 1)
+            {
+                result.Insert(0, ordered[0]);
+            }
+            return result;
+        }
+        public static List<List<T>> SplitList<T>(this List<T> me, int size)
+        {
+            var list = new List<List<T>>();
+            for (int i = 0; i < me.Count; i += size)
+                list.Add(me.GetRange(i, Math.Min(size, me.Count - i)));
+            return list;
         }
 
-        private static void TwoOptSwap(int i, int k)
+        private static double DistanceQuick(Place p1, Place p2)
         {
-            var size = _tour.TourSize();
+            double deltaX = Math.Abs(p2.longitude - p1.longitude);
+            double deltaY = Math.Abs(p2.latitude - p1.latitude);
+            return deltaX > deltaY ? deltaX : deltaY;
+        }
 
-            // 1. take route[0] to route[i-1] and add them in order to new_route
-            for (var c = 0; c <= i - 1; ++c)
-            {
-                _newTour.SetCity(c, _tour.GetCity(c));
-            }
+        private static double Distance(Place p1, Place p2)
+        {
+            return Math.Sqrt(Math.Pow(p2.longitude - p1.longitude, 2) + Math.Pow(p2.latitude - p1.latitude, 2));
+        }
 
-            // 2. take route[i] to route[k] and add them in reverse order to new_route
-            var dec = 0;
-            for (var c = i; c <= k; ++c)
+        private static List<Place> OrderByDistance(List<Place> pointList)
+        {
+            var orderedList = new List<Place>();
+            var currentPoint = pointList[0];
+            while (pointList.Count > 1)
             {
-                _newTour.SetCity(c, _tour.GetCity(k - dec));
-                dec++;
+                orderedList.Add(currentPoint);
+                pointList.RemoveAt(pointList.IndexOf(currentPoint));
+                var closestPointIndex = 0;
+                var closestDistance = double.MaxValue;
+                for (var i = 0; i < pointList.Count; i++)
+                {
+                    var distanceQuick = DistanceQuick(currentPoint, pointList[i]);
+                    if (distanceQuick > closestDistance)
+                        continue;
+                    var distance = Distance(currentPoint, pointList[i]);
+                    if (distance < closestDistance)
+                    {
+                        closestPointIndex = i;
+                        closestDistance = distance;
+                    }
+                }
+                currentPoint = pointList[closestPointIndex];
             }
-
-            // 3. take route[k+1] to end and add them in order to new_route
-            for (var c = k + 1; c < size; ++c)
-            {
-                _newTour.SetCity(c, _tour.GetCity(c));
-            }
-        }*/
+            orderedList.Add(currentPoint);
+            return orderedList;
+        }      
     }
 }
