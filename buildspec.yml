@@ -6,8 +6,8 @@ phases:
     commands:
       - dotnet restore WarehouseTransport/WarehouseTransport.csproj
   build:
-    commands:
-      - dotnet publish -c release -o ./build_output WarehouseTransport/WarehouseTransport.csproj
+    commands: 
+      - dotnet publish -c release -o WarehouseTransport/build_output WarehouseTransport/WarehouseTransport.csproj
 artifacts:
   files:
     - WarehouseTransport/build_output/**/*
