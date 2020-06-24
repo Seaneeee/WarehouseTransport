@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/"
   },
-  "browserslist": {
+  "browserslist": { 
     "production": [
       ">0.2%",
       "not dead",

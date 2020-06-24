@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /aws-deploy.txt
 /azure-deploylinks.txt
+/azureinfo/package-lock.json
