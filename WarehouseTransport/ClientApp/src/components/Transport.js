@@ -118,7 +118,7 @@ class Transport extends React.Component {
         return (
             <div>
                 <div className="driverSelection">
-                    <span>Select driver to view route</span>
+                    <span><b>Select driver</b> to view route</span>
                     <select value={this.state.driver} onChange={this.handleChange}>
                         <option value="1">Driver 1</option>
                         <option value="2">Driver 2</option>
