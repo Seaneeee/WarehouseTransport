@@ -4,10 +4,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - dotnet restore WarehouseTransport.csproj
+      - dotnet restore WarehouseTransport/WarehouseTransport.csproj
   build:
     commands:
-      - dotnet publish -c release -o ./build_output WarehouseTransport.csproj
+      - dotnet publish -c release -o ./build_output WarehouseTransport/WarehouseTransport.csproj
 artifacts:
   files:
     - WarehouseTransport/build_output/**/*
