@@ -1,0 +1,13 @@
+#AWS Deploy
+
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - dotnet restore WarehouseTransport.csproj
+  build:
+    commands:
+      - dotnet publish -c release -o ./build_output WarehouseTransport.csproj
+artifacts:
+  files:
+    - WarehouseTransport/build_output/**/*
