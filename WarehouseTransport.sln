@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseTransport", "WarehouseTransport\WarehouseTransport.csproj", "{B83786F2-1B0F-4E21-AE17-C57407871658}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseTransport", "WarehouseTransport\WarehouseTransport.csproj", "{B83786F2-1B0F-4E21-AE17-C57407871658}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FAD663AF-005D-4CC1-AA24-46ABB6DAC0DC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\master_wharhousex1.yml = .github\workflows\master_wharhousex1.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
