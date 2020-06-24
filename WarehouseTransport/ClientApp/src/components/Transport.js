@@ -55,15 +55,16 @@ class MapDirectionsRenderer extends React.Component {
 
     render() {
         let newDriver = this.props.driver;
-        if (newDriver != this.state.driver) {
-            this.state.loaded = false;
+        let loadedDriver = this.state.loaded;
+        if (newDriver !== this.state.driver) {
+            loadedDriver = false;
             this.getDirections();
         }
 
         if (this.state.error) {
             return <h1>{this.state.error}</h1>;
         }
-        if (!this.state.loaded) {
+        if (!loadedDriver) {
             return <h1 className="loadingRoute">Loading route</h1>;
         }
         return (this.state.directions && <DirectionsRenderer directions={this.state.directions} />)
@@ -111,8 +112,7 @@ class Transport extends React.Component {
             containerElement,
             mapElement,
             defaultCenter,
-            defaultZoom,
-            driver
+            defaultZoom
         } = this.props;
 
         return (

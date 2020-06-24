@@ -1,0 +1,84 @@
+[
+  {
+    "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037/operations/C06C6081DFE791AA",
+    "operationId": "C06C6081DFE791AA",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2020-06-24T01:31:36.537593Z",
+      "duration": "PT20.9713867S",
+      "trackingId": "a6012772-9809-40e2-a1b6-a162bbc65278",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/sites/WharHouseX1",
+        "resourceType": "Microsoft.Web/sites",
+        "resourceName": "WharHouseX1"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037/operations/23344DB16B91F3C6",
+    "operationId": "23344DB16B91F3C6",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2020-06-24T01:31:11.7595483Z",
+      "duration": "PT10.5168125S",
+      "trackingId": "cefe82b9-4e85-488b-a192-81e07d444879",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/serverfarms/ASP-savedevgithubdeploy-ba27",
+        "resourceType": "Microsoft.Web/serverfarms",
+        "resourceName": "ASP-savedevgithubdeploy-ba27"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037/operations/3818BB7B2371CE02",
+    "operationId": "3818BB7B2371CE02",
+    "properties": {
+      "provisioningOperation": "Read",
+      "provisioningState": "Succeeded",
+      "timestamp": "2020-06-24T01:31:08.6602165Z",
+      "duration": "PT0.2591951S",
+      "trackingId": "23eac3c9-2805-41c8-a96c-bce1cbba9f05",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/microsoft.insights/components/WharHouseX1",
+        "resourceType": "microsoft.insights/components",
+        "resourceName": "WharHouseX1",
+        "apiVersion": "2015-05-01"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037/operations/A0F4E933F46A3E95",
+    "operationId": "A0F4E933F46A3E95",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2020-06-24T01:31:08.2535687Z",
+      "duration": "PT7.0108329S",
+      "trackingId": "6ac1b867-75e8-4f89-a9e4-09a0fb82722a",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/microsoft.insights/components/WharHouseX1",
+        "resourceType": "microsoft.insights/components",
+        "resourceName": "WharHouseX1"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037/operations/08586086446285357907",
+    "operationId": "08586086446285357907",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2020-06-24T01:31:36.7576127Z",
+      "duration": "PT0.0547958S",
+      "trackingId": "d06d63e4-8d4b-4816-bc44-abe0d29d2e70",
+      "statusCode": "OK",
+      "statusMessage": null
+    }
+  }
+]

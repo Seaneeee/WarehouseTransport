@@ -1,0 +1,149 @@
+{
+  "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-26a824a2-b037",
+  "name": "Microsoft.Web-WebApp-Portal-26a824a2-b037",
+  "type": "Microsoft.Resources/deployments",
+  "tags": {
+    "primaryResourceId": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourcegroups/savedevgithubdeploy/providers/Microsoft.Web/sites/WharHouseX1",
+    "marketplaceItemId": "Microsoft.WebSite"
+  },
+  "properties": {
+    "templateHash": "1260747125165513672",
+    "parameters": {
+      "subscriptionId": {
+        "type": "String",
+        "value": "b3032e36-4f82-47be-8b68-da1c1fd449b4"
+      },
+      "name": {
+        "type": "String",
+        "value": "WharHouseX1"
+      },
+      "location": {
+        "type": "String",
+        "value": "Central US"
+      },
+      "hostingEnvironment": {
+        "type": "String",
+        "value": ""
+      },
+      "hostingPlanName": {
+        "type": "String",
+        "value": "ASP-savedevgithubdeploy-ba27"
+      },
+      "serverFarmResourceGroup": {
+        "type": "String",
+        "value": "savedevgithubdeploy"
+      },
+      "alwaysOn": {
+        "type": "Bool",
+        "value": false
+      },
+      "sku": {
+        "type": "String",
+        "value": "Free"
+      },
+      "skuCode": {
+        "type": "String",
+        "value": "F1"
+      },
+      "workerSize": {
+        "type": "String",
+        "value": "0"
+      },
+      "workerSizeId": {
+        "type": "String",
+        "value": "0"
+      },
+      "numberOfWorkers": {
+        "type": "String",
+        "value": "1"
+      },
+      "currentStack": {
+        "type": "String",
+        "value": "dotnetcore"
+      },
+      "phpVersion": {
+        "type": "String",
+        "value": "OFF"
+      },
+      "errorLink": {
+        "type": "String",
+        "value": "https://WharHouseX1.scm.azurewebsites.net/detectors?type=tools&name=eventviewer"
+      }
+    },
+    "mode": "Incremental",
+    "debugSetting": {
+      "detailLevel": "None"
+    },
+    "provisioningState": "Succeeded",
+    "timestamp": "2020-06-24T01:31:37.001402Z",
+    "duration": "PT40.0595581S",
+    "correlationId": "54d2acbf-5040-40b4-8b53-2c2391339642",
+    "providers": [
+      {
+        "namespace": "Microsoft.Web",
+        "resourceTypes": [
+          {
+            "resourceType": "sites",
+            "locations": [
+              "centralus"
+            ]
+          },
+          {
+            "resourceType": "serverfarms",
+            "locations": [
+              "centralus"
+            ]
+          }
+        ]
+      },
+      {
+        "namespace": "microsoft.insights",
+        "resourceTypes": [
+          {
+            "resourceType": "components",
+            "locations": [
+              "centralus"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/microsoft.insights/components/WharHouseX1",
+            "resourceType": "microsoft.insights/components",
+            "resourceName": "WharHouseX1"
+          },
+          {
+            "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/serverfarms/ASP-savedevgithubdeploy-ba27",
+            "resourceType": "Microsoft.Web/serverfarms",
+            "resourceName": "ASP-savedevgithubdeploy-ba27"
+          },
+          {
+            "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/microsoft.insights/components/WharHouseX1",
+            "resourceType": "microsoft.insights/components",
+            "resourceName": "WharHouseX1",
+            "apiVersion": "2015-05-01"
+          }
+        ],
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/sites/WharHouseX1",
+        "resourceType": "Microsoft.Web/sites",
+        "resourceName": "WharHouseX1"
+      }
+    ],
+    "outputResources": [
+      {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/microsoft.insights/components/WharHouseX1"
+      },
+      {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/serverfarms/ASP-savedevgithubdeploy-ba27"
+      },
+      {
+        "id": "/subscriptions/b3032e36-4f82-47be-8b68-da1c1fd449b4/resourceGroups/savedevgithubdeploy/providers/Microsoft.Web/sites/WharHouseX1"
+      }
+    ],
+    "validationLevel": "Template"
+  }
+}
