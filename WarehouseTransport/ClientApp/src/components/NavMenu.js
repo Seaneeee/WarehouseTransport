@@ -33,17 +33,17 @@ export class NavMenu extends Component {
               <ul className="navbar-nav flex-grow">
                 <NavItem>
                 <LinkContainer to={'/'} className="text-dark" exact>
-                    <a href="" className="nav-link">Notes</a>
+                    <a href="/" className="nav-link">Notes</a>
                 </LinkContainer>
                 </NavItem>
                 <NavItem>
                 <LinkContainer to={'/transportHooks'} className="text-dark" exact>
-                    <a href="" className="nav-link">Route Calculator using hooks</a>
+                    <a href="/transportHooks" className="nav-link">Route Calculator using hooks</a>
                 </LinkContainer>
                 </NavItem>
                 <NavItem>
                 <LinkContainer to={'/transport'} className="text-dark" exact>
-                    <a href="" className="nav-link">Route Calculator (ES6)</a>
+                    <a href="/transport" className="nav-link">Route Calculator (ES6)</a>
                 </LinkContainer>
                 </NavItem>
               </ul>
