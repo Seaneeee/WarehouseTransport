@@ -158,6 +158,7 @@ namespace WarehouseTransport.Controllers
 
         private static List<Place> OrderByDistance(List<Place> pointList)
         {
+
             var orderedList = new List<Place>();
             var currentPoint = pointList[0];
             while (pointList.Count > 1)
