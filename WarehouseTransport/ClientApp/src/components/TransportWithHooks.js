@@ -17,53 +17,58 @@ function MapDirectionsRenderer(props) {
         driver: 0
     })
 
-    async function getDirections() {
-        const { travelMode, driver } = props;
-        const response = await fetch('api/directions/' + driver);
-        const data = await response.json();
-        let places = data;
-        const waypoints = places.map(p => ({
-            location: { lat: p.latitude, lng: p.longitude },
-            stopover: true
-        }))
-        const origin = waypoints.shift().location;
-        const destination = waypoints.pop().location;
-
-        const directionsService = new window.google.maps.DirectionsService();
-        directionsService.route(
-            {
-                origin: origin,
-                destination: destination,
-                travelMode: travelMode,
-                waypoints: waypoints
-            },
-            (result, status) => {
-                if (status === window.google.maps.DirectionsStatus.OK) {
-                    setState({
-                        ...state,
-                        directions: result
-                    })
-
-                } else {
-                    setState({
-                        ...state,
-                        error: result
-                    })
-                }
-            }
-        );
-        setState({
-            ...state,
-            loaded: true, driver: driver
-        })
-    }
+ 
 
     let newDriver = props.driver;
     let loadedDriver = state.loaded;
     React.useEffect(() => {
-        if (newDriver !== state.driver) {
-            getDirections();
+
+
+        async function getDirections() {
+            if (newDriver !== state.driver) {
+                const { travelMode, driver } = props;
+                const response = await fetch('api/directions/' + driver);
+                const data = await response.json();
+                let places = data;
+                const waypoints = places.map(p => ({
+                    location: { lat: p.latitude, lng: p.longitude },
+                    stopover: true
+                }))
+                const origin = waypoints.shift().location;
+                const destination = waypoints.pop().location;
+
+                const directionsService = new window.google.maps.DirectionsService();
+                directionsService.route(
+                    {
+                        origin: origin,
+                        destination: destination,
+                        travelMode: travelMode,
+                        waypoints: waypoints
+                    },
+                    (result, status) => {
+                        if (status === window.google.maps.DirectionsStatus.OK) {
+                            setState({
+                                ...state,
+                                directions: result
+                            })
+
+                        } else {
+                            setState({
+                                ...state,
+                                error: result
+                            })
+                        }
+                    }
+                );
+                setState({
+                    ...state,
+                    loaded: true, driver: driver
+                })
+            }
         }
+
+        getDirections();
+
     }, [newDriver]);
 
 
