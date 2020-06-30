@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
@@ -33,17 +33,17 @@ export class NavMenu extends Component {
               <ul className="navbar-nav flex-grow">
                 <NavItem>
                 <LinkContainer to={'/'} className="text-dark" exact>
-                    <a className="nav-link">Notes</a>
+                    <a href="" className="nav-link">Notes</a>
                 </LinkContainer>
                 </NavItem>
                 <NavItem>
                 <LinkContainer to={'/transportHooks'} className="text-dark" exact>
-                    <a className="nav-link">Route Calculator using hooks</a>
+                    <a href="" className="nav-link">Route Calculator using hooks</a>
                 </LinkContainer>
                 </NavItem>
                 <NavItem>
                 <LinkContainer to={'/transport'} className="text-dark" exact>
-                    <a className="nav-link">Route Calculator (ES6)</a>
+                    <a href="" className="nav-link">Route Calculator (ES6)</a>
                 </LinkContainer>
                 </NavItem>
               </ul>
