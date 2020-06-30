@@ -23,3 +23,12 @@ code {
 .driverSelection select {
     margin-left:10px;
 }
+
+.navbar-nav .nav-link {
+    border-radius: 5px;
+}
+
+.navbar-nav .nav-link.active {
+    color: blue !important;
+    background-color: #f2f2f2;
+}

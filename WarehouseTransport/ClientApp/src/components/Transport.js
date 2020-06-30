@@ -50,9 +50,6 @@ class MapDirectionsRenderer extends React.Component {
         this.setState({ loaded: true, driver: driver });
     }
 
-    componentDidMount() {
-    }
-
     render() {
         let newDriver = this.props.driver;
         let loadedDriver = this.state.loaded;
@@ -117,6 +114,9 @@ class Transport extends React.Component {
 
         return (
             <div>
+                <div>
+                    <i>Older version using Classes and ES6</i>
+                </div>
                 <div className="driverSelection">
                     <span><b>Select driver</b> to view route</span>
                     <select value={this.state.driver} onChange={this.handleChange}>

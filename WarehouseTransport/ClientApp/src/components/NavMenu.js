@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -26,15 +28,24 @@ export class NavMenu extends Component {
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
           <Container>
-            <NavbarBrand tag={Link} to="/">Ninja Transport Routes</NavbarBrand>
+            <NavbarBrand tag={Link} to="/">Transport Routes</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Notes</NavLink>
+                <LinkContainer to={'/'} className="text-dark" exact>
+                    <a className="nav-link">Notes</a>
+                </LinkContainer>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/transport">Route Calculator</NavLink>
+                <LinkContainer to={'/transportHooks'} className="text-dark" exact>
+                    <a className="nav-link">Route Calculator using hooks (TS)</a>
+                </LinkContainer>
+                </NavItem>
+                <NavItem>
+                <LinkContainer to={'/transport'} className="text-dark" exact>
+                    <a className="nav-link">Route Calculator (ES6)</a>
+                </LinkContainer>
                 </NavItem>
               </ul>
             </Collapse>

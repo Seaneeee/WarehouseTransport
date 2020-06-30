@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
 export class Home extends Component {
-  static displayName = Home.name;
-    //console.log(process.env.PUBLIC_URL);
     render() {
-    return (
-      <div>
-        <h1>Ninja Delivery Notes</h1>
+        return (
+            <div>
+        <h1>Warehouse Prototype</h1>
         <p>Basic delivery calculator between warehouses and destinations:</p>
             <ul>
                 <li>Click <b>Route Calculator</b> in menu to view route for each driver.</li>
