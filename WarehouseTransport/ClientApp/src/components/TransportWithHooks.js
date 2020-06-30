@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import * as React from 'react';
 import {
     withGoogleMap,
     GoogleMap,
@@ -77,7 +77,7 @@ function MapDirectionsRenderer(props) {
 }
 
 const Map = withScriptjs(
-    withGoogleMap(props => (
+    withGoogleMap(props => 
         <GoogleMap
             defaultCenter={props.defaultCenter}
             defaultZoom={props.defaultZoom}
@@ -92,7 +92,7 @@ const Map = withScriptjs(
                 driver={props.driver}
             />
         </GoogleMap>
-    ))
+    )
 );
 
 const googleMapsApiKey = "AIzaSyD1uCZ65ceA_IbL-_cGa4ATNola0934TbE";
@@ -116,7 +116,7 @@ const TransportHooks = (props) => {
     return (
         <div>
             <div>
-                <i>Typescript version using Hooks</i>
+                <i>Simplified version using Hooks</i>
             </div>
             <div className="driverSelection">
                 <span><b>Select driver</b> to view route</span>

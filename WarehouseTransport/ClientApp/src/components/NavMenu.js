@@ -39,7 +39,7 @@ export class NavMenu extends Component {
                 </NavItem>
                 <NavItem>
                 <LinkContainer to={'/transportHooks'} className="text-dark" exact>
-                    <a className="nav-link">Route Calculator using hooks (TS)</a>
+                    <a className="nav-link">Route Calculator using hooks</a>
                 </LinkContainer>
                 </NavItem>
                 <NavItem>

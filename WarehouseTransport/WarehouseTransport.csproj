@@ -25,12 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\components\TransportWithHooks.tsx" />
+    <None Remove="ClientApp\src\components\TransportWithHooks.js" />
     <None Remove="master_wharhousex1.yml" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\components\TransportWithHooks.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\TransportWithHooks.js" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
