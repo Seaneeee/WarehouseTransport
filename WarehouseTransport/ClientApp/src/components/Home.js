@@ -12,7 +12,7 @@ export class Home extends Component {
                 <li>Delivery points distributed between both Warehouses based on above note.</li>
                 <li>Drivers assigned to warehouse for now on delivery points for each Warehouse</li>
                 <li>I removed duplicate positions as part of the algorithm for now as scope needs to refined.  By that I mean it can be handled as multiple deliveries or duplicate bookings and the approach is different.</li>
-                <li>At the moment all the work is performed by the one service for each driver -> cleaning, sorting, warehouse choosing and so on this could be easily split up but it would depend on the requirements</li>
+                <li>At the moment all the work is performed by the one service for each driver -&gt cleaning, sorting, warehouse choosing and so on this could be easily split up but it would depend on the requirements</li>
                 <li>Algorithm does not deal to well with remote locations.  This would be an enhancemant by adding a weighting and distributing to driver evenly.  See driver 5 in this case.</li>
             </ul>
         <p>Display and technology:</p>
