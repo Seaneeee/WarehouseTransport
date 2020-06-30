@@ -68,7 +68,7 @@ function MapDirectionsRenderer(props) {
         }
 
         getDirections();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [newDriver]);
 
 
